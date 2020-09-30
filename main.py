@@ -11,7 +11,7 @@ from torch.optim.lr_scheduler import LambdaLR
 from torch.utils.data import DataLoader
 from evaluate import return_report
 
-import dataset
+import datamodels
 import models
 import utils
 
@@ -44,7 +44,7 @@ def go(**keward):
     setup_seed(opt.seed)
 
 
-    DataModel = getattr(dataset, 'DataModel')
+    DataModel = getattr(datamodels, 'DataModel')
     train_data = DataModel(opt, case='train')
     train_data_loader = DataLoader(train_data, opt.train_batch_size, shuffle=True, num_workers=4, collate_fn=collate_fn)
     dev_data = DataModel(opt, case='dev')
