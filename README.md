@@ -7,8 +7,10 @@
 |—— checkpoints     # 存放训练模型参数
 |—— models          # 存放自己定义的网络模型
 |—— out             # 存放模型的预测结果，如NER: 所有词极其BIO形式
-|—— dataset         # 存放原始数据以及自己定义的DataModel，用来加载数据
+|—— datamodels         # 存放原始数据以及自己定义的DataModel，用来加载数据
 |—— |—— DataModel.py
+|—— dataset         # 存放数据集
+|—— |—— tool_data   # 存放word embedding, label等工具文件
 |—— config.py       # 用于管理模型超参数
 |—— utils.py        # 包含一些工具函数文件，如时间函数，制图函数，平均损失计算函数等
 |—— mian.py         # 主函数
@@ -29,7 +31,7 @@
 
 ![main.py示意图](./main函数设计.png)
 ## 4.1 前期准备模块
-前期准备模块功能有【参数设置】、【数据处理】、【模型搭建】, 其在`config.py`,`dataset`与`models`三个文件下完成.
+前期准备模块功能有【参数设置】、【数据处理】、【模型搭建】, 其在`config.py`,`datamodels`与`models`三个文件下完成.
 - 参数设置：`config.py`中实例化的`opt`用来管理参数，通过命令行`parse`更新默认参数值，并打印相关信息到控制台。
 - 数据处理：
 `dataset`中的`dataset.py`文件中有用来管理数据的`DataModel`类，其继承了`pytorch`本身的`Dataset`类，用来实现处理数据和管理数据的功能，其成员有
