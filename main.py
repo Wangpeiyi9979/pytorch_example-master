@@ -5,21 +5,19 @@ import os
 import numpy as np
 import torch.optim as optim
 
-from ipdb import set_trace
 from tqdm import trange
 from torch.optim.lr_scheduler import LambdaLR
 from torch.utils.data import DataLoader
-from evaluate import return_report
 
 import datamodels
 import models
 import utils
 
-from config import opt
 
 
 def collate_fn(batch):
-    """Function:用来对DataModel打包的npy数据进行解包,其对应打包的数据
+    """Function:用来对DataModel打包的npy数据进行解包,其对应打包的数据，
+    todo: 其实应该把padding的工作，以及tensor转换的工作放到这里
     使用说明: 替换下方的x1, x2, x3
     """
     x1, x2, x3 = zip(*batch)
@@ -38,6 +36,7 @@ def setup_seed(seed):
 
 def go(**keward):
 
+    opt = getattr(keward['model'], 'Configs')()
     opt.parse(keward)
     if opt.use_gpu:
         torch.cuda.set_device(opt.gpu_id)
